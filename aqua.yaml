@@ -3,7 +3,7 @@
 # https://aquaproj.github.io/
 registries:
 - type: standard
-  ref: v4.448.0
+  ref: v4.448.0 # renovate: depName=aquaproj/aqua-registry
 - type: local
   name: local
   path: registry.yaml
