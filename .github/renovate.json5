@@ -7,7 +7,7 @@
     'customManagers:makefileVersions',
   ],
   ignorePresets: [
-    ':prHourlyLimit4',
+    ':prHourlyLimit2',
   ],
   labels: [
     'dependencies',
