@@ -15,12 +15,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-
-      - name: Run Renovate via docker
-        run: |
-          docker run --rm \
-            -e RENOVATE_PLATFORM=github \
-            -e RENOVATE_TOKEN="${{ secrets.RENOVATE_TOKEN }}" \
-            -e RENOVATE_REPOSITORIES="${{ github.repository }}" \
-            -e LOG_LEVEL=debug \
-            ghcr.io/renovatebot/renovate:latest
+        
+      - name: Self-hosted Renovate
+        uses: renovatebot/github-action@f7fad228a053c69a98e24f8e4f6cf40db8f61e08 # renovate v44.2.1
+        with:
+          configurationFile: config.json
+          token: ${{ secrets.RENOVATE_TOKEN }}
