@@ -48,6 +48,8 @@
       ],
       groupName: 'scheduled dependency update',
       groupSlug: 'scheduled-dependency-update',
+      "prTitle": "chore(deps): scheduled dependency update",
+      separateMajorMinor: false,
     },
     // We need to keep three Kubernetes minor versions, so minor updates must be handled manually.
     {
@@ -63,6 +65,12 @@
       allowedVersions: '/^v{{{major}}}\\.{{{minor}}}\\./',
       groupName: 'kubernetes dependencies',
       groupSlug: 'kubernetes-dependencies',
+      "prTitle": "chore(deps): kubernetes dependency update",
+      "prBodyNotes": [
+        "Renovate will not update the Kubernetes minor version automatically.",
+        "Please check the Kubernetes release notes and update the version manually if needed:",
+      ],
+      separateMajorMinor: false,
     },
     {
       matchManagers: [
@@ -76,6 +84,7 @@
       ],
       groupName: 'kubernetes dependencies',
       groupSlug: 'kubernetes-dependencies',
+      "prTitle": "chore(deps): kubernetes dependency update",
       separateMajorMinor: false,
     },
     {
@@ -89,6 +98,7 @@
       ],
       groupName: 'kubernetes dependencies',
       groupSlug: 'kubernetes-dependencies',
+      "prTitle": "chore(deps): kubernetes dependency update",
       separateMajorMinor: false,
     },
   ],
