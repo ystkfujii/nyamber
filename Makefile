@@ -29,7 +29,7 @@ CONTROLLER_TOOLS_VERSION ?= v0.19.0
 
 # ENVTEST_K8S_VERSION refers to the version of kubebuilder assets to be downloaded by envtest binary.
 # the kubebuilder version of the ready-to-use can get by "./bin/setup-envtest list" command.
-# renovate: datasource=docker depName=kindest/node
+# renovate:
 ENVTEST_K8S_VERSION = 1.34.1
 
 # KUSTOMIZE_VERSION can be found at https://github.com/kubernetes-sigs/kustomize/releases
