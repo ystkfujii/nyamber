@@ -1,10 +1,14 @@
 {
   $schema: 'https://docs.renovatebot.com/renovate-schema.json',
   extends: [
-    'config:best-practices',
-    'github>aquaproj/aqua-renovate-config#2.10.0',
+    'abandonments:recommended',
+    'config:recommended',
     'customManagers:dockerfileVersions',
     'customManagers:makefileVersions',
+    'docker:pinDigests',
+    'github>aquaproj/aqua-renovate-config#2.10.0',
+    'helpers:pinGitHubActionDigests',
+    ':configMigration',
   ],
   labels: ['dependencies'],
   minimumReleaseAge: '14 days',
