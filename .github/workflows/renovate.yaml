@@ -22,6 +22,6 @@ jobs:
             -e RENOVATE_PLATFORM=github \
             -e RENOVATE_TOKEN="${{ secrets.RENOVATE_TOKEN }}" \
             -e RENOVATE_REPOSITORIES="${{ github.repository }}" \
-            -e LOG_LEVEL=info \
+            -e LOG_LEVEL=debug \
             -v "${{ github.workspace }}/renovate.json:/usr/src/app/config.js:ro" \
             ghcr.io/renovatebot/renovate:latest
