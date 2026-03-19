@@ -25,12 +25,12 @@ CRD_TO_MARKDOWN ?= $(LOCALBIN)/crd-to-markdown
 
 ## Tool Versions
 # renovate: datasource=go depName=sigs.k8s.io/controller-tools
-CONTROLLER_TOOLS_VERSION ?= v0.19.0
+CONTROLLER_TOOLS_VERSION ?= v0.20.1
 
 # ENVTEST_K8S_VERSION refers to the version of kubebuilder assets to be downloaded by envtest binary.
 # the kubebuilder version of the ready-to-use can get by "./bin/setup-envtest list" command.
 # renovate: datasource=docker depName=kindest/node
-ENVTEST_K8S_VERSION = 1.34.1
+ENVTEST_K8S_VERSION = v1.34.3
 
 # KUSTOMIZE_VERSION can be found at https://github.com/kubernetes-sigs/kustomize/releases
 # renovate: datasource=github-tags depName=kubernetes-sigs/kustomize
