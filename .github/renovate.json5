@@ -1,0 +1,86 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:best-practices",
+    'github>aquaproj/aqua-renovate-config#2.10.0',
+    'customManagers:dockerfileVersions',
+    'customManagers:makefileVersions',
+  ],
+  ignorePresets: [
+    ':prHourlyLimit4',
+  ],
+  "labels": ["dependencies"],
+  minimumReleaseAge: '14 days',
+  "customManagers": [
+    // customMangers:makefileVersions does not support digests, so we use regex manager
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["e2e/Makefile"],
+      "depNameTemplate": "kindest/node",
+      "datasourceTemplate": "docker",
+      "matchStrings": [
+        "# renovate:\\s+KIND_IMAGE_REF\\s*:?=\\s*[\"']?(?<currentValue>[^@\"'\\s]+)@(?<currentDigest>sha256:[a-f0-9]+)[\"']?"
+      ],
+      "versioningTemplate": "docker",
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [".github/workflows/ci.yaml"],
+      "depNameTemplate": "kindest/node",
+      "datasourceTemplate": "docker",
+      "matchStrings": [
+        "-\\s*[\"']?(?<currentValue>v[^@\"'\\s]+)@(?<currentDigest>sha256:[a-f0-9]+)[\"']?\\s*#\\s*renovate:",
+      ],
+      "versioningTemplate": "docker",
+    },
+  ],
+  "packageRules": [
+    {
+      "matchManagers": ["gomod","github-actions","dockerfile","regex"],
+      "groupName": "scheduled dependency update",
+      "groupSlug": "scheduled-dependency-update",
+    },
+    // We need to keep three Kubernetes minor versions, so minor updates must be handled manually.
+    {
+      "matchManagers": ["regex"],
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["kindest/node"],
+      "allowedVersions": "/^v{{{major}}}\\.{{{minor}}}\\./",
+      "groupName": "kubernetes dependencies",
+      "groupSlug": "kubernetes-dependencies",
+    },
+    {
+      "matchManagers": ["gomod"],
+      "matchPackageNames": [
+        "k8s.io/api",
+        "k8s.io/apiextensions-apiserver",
+        "k8s.io/apimachinery",
+        "k8s.io/client-go",
+      ],
+      "groupName": "kubernetes dependencies",
+      "groupSlug": "kubernetes-dependencies",
+      "separateMajorMinor": false
+    },
+    {
+      "matchManagers": ["regex"],
+      "matchPackageNames": [
+            "/^kubernetes\\/.*/",
+            "/^kubernetes-sigs\\/.*/",
+            "sigs.k8s.io/controller-tools",
+      ],
+      "groupName": "kubernetes dependencies",
+      "groupSlug": "kubernetes-dependencies",
+      "separateMajorMinor": false
+    },
+  ],
+  "postUpdateOptions": [
+    "gomodTidy",
+    "gomodUpdateImportPaths",
+  ],
+  "enabledManagers": [
+    "dockerfile",
+    "gomod",
+    "github-actions",
+    "regex",
+  ],
+}
